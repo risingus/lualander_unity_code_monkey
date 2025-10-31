@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: 09c8936a67cd57343866dfa0eb52eb85
+  productGUID: 4a66b2362ebacd24d93947e85fd50a90
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: LuaLander
+  productName: lua_lander_code_monkey
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -596,14 +596,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: LuaLander
+  metroPackageName: lua_lander_code_monkey
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: LuaLander
+  metroApplicationDescription: lua_lander_code_monkey
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -674,11 +674,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: c02ae03d-a278-405b-be59-d490ecd785c2
+  cloudProjectId: b1b93193-e206-4dac-a63d-185a9cefc181
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: LuaLander
-  organizationId: hugo-cardoso
+  projectName: lua_lander_code_monkey
+  organizationId: risingus
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
