@@ -1,7 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Lander : MonoBehaviour {
+	public event EventHandler OnUpForce;
+	public event EventHandler OnRightForce;
+	public event EventHandler OnLeftForce;
+	public event EventHandler OnBeforeForce;
 	private Rigidbody2D landerRigidbody2D;
 
 	private void Awake() {
@@ -9,19 +14,23 @@ public class Lander : MonoBehaviour {
 	}
 
 	private void FixedUpdate() {
+		OnBeforeForce?.Invoke(this, EventArgs.Empty);
 		if (Keyboard.current.upArrowKey.isPressed) {
 			const float force = 700f;
 			landerRigidbody2D.AddForce(transform.up * (force * Time.deltaTime));
+			OnUpForce?.Invoke(this, EventArgs.Empty);
 		}
 
 		if (Keyboard.current.leftArrowKey.isPressed) {
 			const float turnSpeed = +100f;
 			landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
+			OnLeftForce?.Invoke(this, EventArgs.Empty);
 		}
 
 		if (Keyboard.current.rightArrowKey.isPressed) {
 			const float turnSpeed = -100f;
 			landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
+			OnRightForce?.Invoke(this, EventArgs.Empty);
 		}
 	}
 
@@ -58,5 +67,9 @@ public class Lander : MonoBehaviour {
 
 		Debug.Log("landingAngleScore" + landingAngleScore);
 		Debug.Log("landingSpeedScore" + landingSpeedScore);
+
+		int score = Mathf.RoundToInt((landingAngleScore + landingSpeedScore) * landingPad.GetScoreMultiplier());
+
+		Debug.Log("multiplier" + score);
 	}
 }
