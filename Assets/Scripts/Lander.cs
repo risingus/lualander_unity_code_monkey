@@ -3,18 +3,38 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Lander : MonoBehaviour {
+	public static Lander Instance { get; private set; }
+
 	public event EventHandler OnUpForce;
 	public event EventHandler OnRightForce;
 	public event EventHandler OnLeftForce;
 	public event EventHandler OnBeforeForce;
+	public event EventHandler OnCoinPickup;
+	public event EventHandler<OnLandedEventArgs> OnLanded;
+
+	public class OnLandedEventArgs : EventArgs {
+		public int score;
+	}
+
 	private Rigidbody2D landerRigidbody2D;
+	private float fuelAmount = 10f;
 
 	private void Awake() {
+		Instance = this;
 		landerRigidbody2D = GetComponent<Rigidbody2D>();
 	}
 
 	private void FixedUpdate() {
 		OnBeforeForce?.Invoke(this, EventArgs.Empty);
+
+		if (fuelAmount <= 0f) return;
+
+		if (Keyboard.current.upArrowKey.isPressed
+		    || Keyboard.current.leftArrowKey.isPressed
+		    || Keyboard.current.rightArrowKey.isPressed) {
+			ConsumeFuel();
+		}
+
 		if (Keyboard.current.upArrowKey.isPressed) {
 			const float force = 700f;
 			landerRigidbody2D.AddForce(transform.up * (force * Time.deltaTime));
@@ -70,6 +90,26 @@ public class Lander : MonoBehaviour {
 
 		int score = Mathf.RoundToInt((landingAngleScore + landingSpeedScore) * landingPad.GetScoreMultiplier());
 
-		Debug.Log("multiplier" + score);
+		OnLanded?.Invoke(this, new OnLandedEventArgs {
+			score = score,
+		});
+	}
+
+	private void OnTriggerEnter2D(Collider2D collider2D) {
+		if (collider2D.gameObject.TryGetComponent(out FuelPickup fuelPickup)) {
+			const float addFuelAmount = 10f;
+			fuelAmount += addFuelAmount;
+			fuelPickup.DestroySelf();
+		}
+
+		if (collider2D.gameObject.TryGetComponent(out CoinPickup coinPickup)) {
+			OnCoinPickup?.Invoke(this, EventArgs.Empty);
+			coinPickup.DestroySelf();
+		}
+	}
+
+	private void ConsumeFuel() {
+		const float fuelConsumptionAmount = 1f;
+		fuelAmount -= fuelConsumptionAmount * Time.deltaTime;
 	}
 }
