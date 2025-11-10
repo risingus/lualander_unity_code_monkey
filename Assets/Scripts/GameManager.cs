@@ -2,11 +2,30 @@ using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+	public static GameManager Instance { get; private set; }
+
 	private int score;
+	private float time;
+	private bool isTimerActive;
+
+	private void Awake() {
+		Instance = this;
+	}
 
 	private void Start() {
 		Lander.Instance.OnCoinPickup += Lander_OnCoinPickup;
 		Lander.Instance.OnLanded += Lander_OnLanded;
+		Lander.Instance.OnStateChanged += Lander_onStateChanged;
+	}
+
+	private void Update() {
+		if (isTimerActive) {
+			time += Time.deltaTime;
+		}
+	}
+
+	private void Lander_onStateChanged(object sender, Lander.OnStateChangedEventArgs e) {
+		isTimerActive = e.state == Lander.State.Normal;
 	}
 
 	private void Lander_OnLanded(object sender, Lander.OnLandedEventArgs e) {
@@ -19,5 +38,13 @@ public class GameManager : MonoBehaviour {
 
 	public void AddScore(int addScoreAmount) {
 		score += addScoreAmount;
+	}
+
+	public int GetScore() {
+		return score;
+	}
+
+	public float GetTime() {
+		return time;
 	}
 }
