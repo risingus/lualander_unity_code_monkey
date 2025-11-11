@@ -7,7 +7,6 @@
     <list default="true" id="0e00e3d7-f74f-466b-ac19-38bc08992bce" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.lualander_unity_code_monkey/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.lualander_unity_code_monkey/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Lander.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lander.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +40,11 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -49,13 +52,14 @@
     "nodejs_package_manager_path": "npm",
     "rider.code.cleanup.on.save": "true",
     "rider.code.cleanup.on.save.profile": "Built-in: Reformat Code",
-    "settings.editor.selected.configurable": "Inspections-C#",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Programas\6000.1.12f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.1.12f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\repos\lualander_unity_code_monkey -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\repos\lualander_unity_code_monkey" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -67,7 +71,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Programas\6000.1.12f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.1.12f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\repos\lualander_unity_code_monkey -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\repos\lualander_unity_code_monkey" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -125,6 +129,7 @@
       <workItem from="1762523782800" duration="5663000" />
       <workItem from="1762781272850" duration="11094000" />
       <workItem from="1762865629753" duration="8279000" />
+      <workItem from="1762896011775" duration="365000" />
     </task>
     <servers />
   </component>

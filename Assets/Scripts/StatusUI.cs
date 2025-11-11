@@ -17,7 +17,8 @@ public class NewMonoBehaviourScript : MonoBehaviour {
 		speedLeftArrowGameObject.SetActive(Lander.Instance.GetSpeedX() < 0);
 
 		fuelImage.fillAmount = Lander.Instance.GetFuelAmountNormalized();
-		statsTextMesh.text = GameManager.Instance.GetScore() + "\n" +
+		statsTextMesh.text = GameManager.Instance.GetLevelNumber() + "\n" +
+		                     GameManager.Instance.GetScore() + "\n" +
 		                     Mathf.Round(GameManager.Instance.GetTime()) + "\n" +
 		                     Mathf.Abs(Mathf.Round(Lander.Instance.GetSpeedX() * 10f)) + "\n" +
 		                     Mathf.Abs(Mathf.Round(Lander.Instance.GetSpeedY() * 10f));

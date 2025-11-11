@@ -34,8 +34,7 @@ public class LandedUI : MonoBehaviour {
 			nextButtonClickAction = GameManager.Instance.RetryLevel;
 		}
 
-		statsTextMesh.text = GameManager.Instance.GetLevelNumber() + "\n" +
-		                     Mathf.Round(e.landingSpeed * 2f) + "\n" +
+		statsTextMesh.text = Mathf.Round(e.landingSpeed * 2f) + "\n" +
 		                     Mathf.Round(e.dotVector * 100f) + "\n" +
 		                     "x" + e.scoreMultiplier + "\n" +
 		                     e.score;
