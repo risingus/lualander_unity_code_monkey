@@ -97,6 +97,7 @@ public class Lander : MonoBehaviour {
 
 				break;
 			case State.GameOver:
+				landerRigidbody2D.gravityScale = 0f;
 				break;
 		}
 	}
@@ -168,8 +169,8 @@ public class Lander : MonoBehaviour {
 		SetState(State.GameOver);
 	}
 
-	private void OnTriggerEnter2D(Collider2D collider2D) {
-		if (collider2D.gameObject.TryGetComponent(out FuelPickup fuelPickup)) {
+	private void OnTriggerEnter2D(Collider2D incomingCollider) {
+		if (incomingCollider.gameObject.TryGetComponent(out FuelPickup fuelPickup)) {
 			const float addFuelAmount = 10f;
 			fuelAmount += addFuelAmount;
 			if (fuelAmount > fuelAmountMax) {
@@ -179,16 +180,16 @@ public class Lander : MonoBehaviour {
 			fuelPickup.DestroySelf();
 		}
 
-		if (collider2D.gameObject.TryGetComponent(out CoinPickup coinPickup)) {
+		if (incomingCollider.gameObject.TryGetComponent(out CoinPickup coinPickup)) {
 			OnCoinPickup?.Invoke(this, EventArgs.Empty);
 			coinPickup.DestroySelf();
 		}
 	}
 
-	private void SetState(State state) {
-		this.state = state;
+	private void SetState(State newState) {
+		this.state = newState;
 		OnStateChanged?.Invoke(this, new OnStateChangedEventArgs {
-			state = state
+			state = newState
 		});
 	}
 
