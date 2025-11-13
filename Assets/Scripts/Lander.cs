@@ -202,15 +202,9 @@ public class Lander : MonoBehaviour {
 		return fuelAmount;
 	}
 
-	public float GetFuelAmountNormalized() {
-		return fuelAmount / fuelAmountMax;
-	}
+	public float GetFuelAmountNormalized() => fuelAmount / fuelAmountMax;
 
-	public float GetSpeedX() {
-		return landerRigidbody2D.linearVelocityX;
-	}
+	public float GetSpeedX() => landerRigidbody2D.linearVelocityX;
 
-	public float GetSpeedY() {
-		return landerRigidbody2D.linearVelocityY;
-	}
+	public float GetSpeedY() => landerRigidbody2D.linearVelocityY;
 }
