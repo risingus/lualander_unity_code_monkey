@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using Vector2 = UnityEngine.Vector2;
 
 public class Lander : MonoBehaviour {
 	private const float GRAVITY_NORMAL = 0.7f;
@@ -12,6 +12,7 @@ public class Lander : MonoBehaviour {
 	public event EventHandler OnLeftForce;
 	public event EventHandler OnBeforeForce;
 	public event EventHandler OnCoinPickup;
+	public event EventHandler OnFuelPickup;
 	public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
 
 	public class OnStateChangedEventArgs : EventArgs {
@@ -60,9 +61,10 @@ public class Lander : MonoBehaviour {
 		switch (state) {
 			default:
 			case State.WaitingToStart:
-				if (Keyboard.current.upArrowKey.isPressed
-				    || Keyboard.current.leftArrowKey.isPressed
-				    || Keyboard.current.rightArrowKey.isPressed) {
+				if (GameInput.Instance.IsUpActionPressed() ||
+				    GameInput.Instance.IsRightActionPressed() ||
+				    GameInput.Instance.IsLeftActionPressed() ||
+				    GameInput.Instance.GetMovementInputVector2() != Vector2.zero) {
 					landerRigidbody2D.gravityScale = GRAVITY_NORMAL;
 					SetState(State.Normal);
 				}
@@ -71,25 +73,30 @@ public class Lander : MonoBehaviour {
 			case State.Normal:
 				if (fuelAmount <= 0f) return;
 
-				if (Keyboard.current.upArrowKey.isPressed
-				    || Keyboard.current.leftArrowKey.isPressed
-				    || Keyboard.current.rightArrowKey.isPressed) {
+				if (GameInput.Instance.IsUpActionPressed()
+				    || GameInput.Instance.IsRightActionPressed()
+				    || GameInput.Instance.IsLeftActionPressed() ||
+				    GameInput.Instance.GetMovementInputVector2() != Vector2.zero) {
 					ConsumeFuel();
 				}
 
-				if (Keyboard.current.upArrowKey.isPressed) {
+				const float gamePadDeadzone = 0.4f;
+				if (GameInput.Instance.IsUpActionPressed() ||
+				    GameInput.Instance.GetMovementInputVector2().y > gamePadDeadzone) {
 					const float force = 700f;
 					landerRigidbody2D.AddForce(transform.up * (force * Time.deltaTime));
 					OnUpForce?.Invoke(this, EventArgs.Empty);
 				}
 
-				if (Keyboard.current.leftArrowKey.isPressed) {
+				if (GameInput.Instance.IsLeftActionPressed() ||
+				    GameInput.Instance.GetMovementInputVector2().x < -gamePadDeadzone) {
 					const float turnSpeed = +100f;
 					landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
 					OnLeftForce?.Invoke(this, EventArgs.Empty);
 				}
 
-				if (Keyboard.current.rightArrowKey.isPressed) {
+				if (GameInput.Instance.IsRightActionPressed() ||
+				    GameInput.Instance.GetMovementInputVector2().x > gamePadDeadzone) {
 					const float turnSpeed = -100f;
 					landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
 					OnRightForce?.Invoke(this, EventArgs.Empty);
@@ -177,6 +184,7 @@ public class Lander : MonoBehaviour {
 				fuelAmount = fuelAmountMax;
 			}
 
+			OnFuelPickup?.Invoke(this, EventArgs.Empty);
 			fuelPickup.DestroySelf();
 		}
 
