@@ -2478,8 +2478,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: -154}
-  m_SizeDelta: {x: 349.9713, y: 126.178}
+  m_AnchoredPosition: {x: -13, y: 132}
+  m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &990015850
 MonoBehaviour:
@@ -2963,8 +2963,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: -154}
-  m_SizeDelta: {x: 349.9713, y: 126.178}
+  m_AnchoredPosition: {x: -13, y: 64}
+  m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1226124816
 MonoBehaviour:
@@ -3829,7 +3829,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resumeButton: {fileID: 2146459630}
-  mainMenuButton: {fileID: 0}
+  mainMenuButton: {fileID: 428341043}
+  soundVolumeButton: {fileID: 990015850}
+  musicVolumeButton: {fileID: 1226124816}
+  soundVolumeTextMesh: {fileID: 389293795}
+  musicVolumeTextMesh: {fileID: 196388317}
 --- !u!1 &1501776330
 GameObject:
   m_ObjectHideFlags: 0
