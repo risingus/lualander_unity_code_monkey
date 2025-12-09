@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 	private int score;
 	private float time;
 	private bool isTimerActive;
+	public const int scorePerCoin = 100;
 
 
 	private void Awake() {
@@ -74,8 +75,8 @@ public class GameManager : MonoBehaviour {
 		AddScore(e.score);
 	}
 
-	private void Lander_OnCoinPickup(object sender, System.EventArgs e) {
-		AddScore(500);
+	private void Lander_OnCoinPickup(object sender, EventArgs e) {
+		AddScore(scorePerCoin);
 	}
 
 	public void AddScore(int addScoreAmount) {
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void PauseUnpauseGame() {
-		if (Time.timeScale == 1f) {
+		if (Mathf.Approximately(Time.timeScale, 1f)) {
 			PauseGame();
 			return;
 		}

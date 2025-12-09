@@ -152,17 +152,12 @@ public class Lander : MonoBehaviour {
 			return;
 		}
 
-		Debug.Log("successful landing");
-
 		const float maxScoreAmountLandingAngle = 100;
 		const float scoreDotVectorMultiplier = 10f;
 		float landingAngleScore = maxScoreAmountLandingAngle -
 		                          Mathf.Abs(dotVector - 1f) * scoreDotVectorMultiplier * maxScoreAmountLandingAngle;
 		const float maxScoreAmountLandingSpeed = 100;
 		float landingSpeedScore = (softLandingVelocityMagnitude - relativeVelocityMagnitude) * maxScoreAmountLandingSpeed;
-
-		Debug.Log("landingAngleScore" + landingAngleScore);
-		Debug.Log("landingSpeedScore" + landingSpeedScore);
 
 		int score = Mathf.RoundToInt((landingAngleScore + landingSpeedScore) * landingPad.GetScoreMultiplier());
 
@@ -176,22 +171,27 @@ public class Lander : MonoBehaviour {
 		SetState(State.GameOver);
 	}
 
+	private void PickupCoin(Collider2D incomingCollider) {
+		if (!incomingCollider.gameObject.TryGetComponent(out CoinPickup coinPickup)) return;
+		OnCoinPickup?.Invoke(this, EventArgs.Empty);
+		coinPickup.DestroySelf();
+	}
+
+	private void PickupFuel(Collider2D incomingCollider) {
+		if (!incomingCollider.gameObject.TryGetComponent(out FuelPickup fuelPickup)) return;
+		const float addFuelAmount = 10f;
+		fuelAmount += addFuelAmount;
+		if (fuelAmount > fuelAmountMax) {
+			fuelAmount = fuelAmountMax;
+		}
+
+		OnFuelPickup?.Invoke(this, EventArgs.Empty);
+		fuelPickup.DestroySelf();
+	}
+
 	private void OnTriggerEnter2D(Collider2D incomingCollider) {
-		if (incomingCollider.gameObject.TryGetComponent(out FuelPickup fuelPickup)) {
-			const float addFuelAmount = 10f;
-			fuelAmount += addFuelAmount;
-			if (fuelAmount > fuelAmountMax) {
-				fuelAmount = fuelAmountMax;
-			}
-
-			OnFuelPickup?.Invoke(this, EventArgs.Empty);
-			fuelPickup.DestroySelf();
-		}
-
-		if (incomingCollider.gameObject.TryGetComponent(out CoinPickup coinPickup)) {
-			OnCoinPickup?.Invoke(this, EventArgs.Empty);
-			coinPickup.DestroySelf();
-		}
+		PickupFuel(incomingCollider);
+		PickupCoin(incomingCollider);
 	}
 
 	private void SetState(State newState) {
